@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="守护健康吧咩爸！" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="theme-color" content="#f4f5f1" />
+    <title>守护健康吧咩爸！</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <div class="page-panel active" id="todayPage">
+        <section class="hero-panel">
+          <div class="top-bar">
+            <div>
+              <h1>守护健康吧咩爸！</h1>
+            </div>
+            <button class="icon-button" type="button" id="historyOpen" aria-label="查看历史记录">≡</button>
+          </div>
+
+          <div class="risk-meter" aria-label="今日身体负担">
+            <div class="meter-ring">
+              <span id="riskScore">68</span>
+              <small>身体负担</small>
+            </div>
+            <div class="meter-copy">
+              <strong id="riskLevel">中等偏高</strong>
+              <p id="riskMessage">最近晚睡和饮酒叠加，血压、尿酸和第二天自控力都会更难稳。</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-title">
+            <h2>今天只守一件事</h2>
+            <span>选择即可</span>
+          </div>
+          <div class="choice-grid" id="todayChoices">
+            <button type="button" data-points="20">不喝酒</button>
+            <button type="button" data-points="15">不吃宵夜</button>
+            <button type="button" data-points="20">23:30 前上床</button>
+            <button type="button" data-points="10">测一次血压</button>
+          </div>
+        </section>
+
+        <section class="section reward-card">
+          <div class="section-title">
+            <h2>女儿的守护奖励</h2>
+            <span id="pointLabel">0 / 100</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <div class="reward-row">
+            <p id="rewardText">还差 35 守住值，可解锁“一周奖励”。</p>
+            <button type="button" id="redeemBtn">解锁</button>
+          </div>
+          <div class="gift-list" id="giftList">
+            <article class="gift-card unlocked">
+              <span>3 天</span>
+              <strong>咩咩的语音鼓励！</strong>
+              <p>完成 3 天守护后，解锁一段专属语音鼓励。</p>
+            </article>
+            <article class="gift-card current">
+              <span>1 周</span>
+              <strong>咩咩准备的爱心礼物一份！</strong>
+              <p>完成一周守护后，解锁咩咩提前准备的小礼物。</p>
+            </article>
+            <article class="gift-card">
+              <span>1 个月</span>
+              <strong>咩咩的神秘奖励！</strong>
+              <p>完成一个月守护后，再揭晓这份特别奖励。</p>
+            </article>
+          </div>
+        </section>
+      </div>
+
+      <div class="page-panel" id="recordPage">
+      <section class="section">
+        <div class="section-title">
+          <h2>今日记录</h2>
+          <span>选择即可</span>
+        </div>
+        <div class="recovery-flow" id="recoveryFlow">
+          <article class="question active" data-step="0">
+            <h3>饮水情况</h3>
+            <div class="pill-list">
+              <button type="button">充足，约 6 杯以上</button>
+              <button type="button">一般，约 3-5 杯</button>
+              <button type="button">偏少，少于 3 杯</button>
+              <button type="button">几乎没喝水</button>
+            </div>
+          </article>
+          <article class="question" data-step="1">
+            <h3>运动情况</h3>
+            <div class="pill-list">
+              <button type="button">运动 30 分钟以上</button>
+              <button type="button">散步 10-30 分钟</button>
+              <button type="button">今天久坐较多</button>
+              <button type="button">身体不适，未运动</button>
+            </div>
+          </article>
+          <article class="question" data-step="2">
+            <h3>睡眠情况</h3>
+            <div class="pill-list">
+              <button type="button">23:00 前入睡</button>
+              <button type="button">23:00-00:00 入睡</button>
+              <button type="button">00:00-01:00 入睡</button>
+              <button type="button">01:00-02:00 入睡</button>
+              <button type="button">02:00-03:00 入睡</button>
+              <button type="button">03:00 以后入睡</button>
+            </div>
+          </article>
+          <article class="question" data-step="3">
+            <h3>今天饮酒了吗？</h3>
+            <div class="pill-list">
+              <button type="button">没有饮酒</button>
+              <button type="button">喝了一点</button>
+              <button type="button">喝多了</button>
+              <button type="button">今晚可能会喝</button>
+            </div>
+          </article>
+          <article class="question" data-step="4">
+            <h3>饮食情况</h3>
+            <div class="pill-list">
+              <button type="button">整体清淡</button>
+              <button type="button">吃了重口味</button>
+              <button type="button">吃了宵夜</button>
+              <button type="button">喝了甜饮</button>
+            </div>
+          </article>
+          <article class="question" data-step="5">
+            <h3>血压记录</h3>
+            <div class="pill-list">
+              <button type="button">已测，正常</button>
+              <button type="button">已测，偏高</button>
+              <button type="button">还没测</button>
+              <button type="button">今天不方便测</button>
+            </div>
+          </article>
+          <div class="flow-done" id="flowDone">
+            <strong>今日记录完成 +10</strong>
+            <p>记录完成！爱你爱你爸爸❤️</p>
+          </div>
+        </div>
+        <article class="today-summary" id="todaySummary">
+          <div class="section-title">
+            <h2>今日总结</h2>
+            <span>自动生成</span>
+          </div>
+          <p class="empty-summary" id="emptySummary">完成上面的选择后，这里会列出今天的记录。</p>
+          <ul id="summaryList"></ul>
+        </article>
+      </section>
+      </div>
+
+      <div class="page-panel" id="guardPage">
+      <section class="section">
+        <div class="section-title">
+          <h2>后果很严重！咩咩会担心！</h2>
+          <span>相似行为</span>
+        </div>
+        <article class="news-card">
+          <div class="tag-row" id="newsTags">
+            <span>饮酒</span><span>晚睡</span><span>脑卒中风险</span>
+          </div>
+          <h3 id="newsTitle">聚餐饮酒后突发脑卒中案例</h3>
+          <p id="newsBody">真实报道中，聚餐饮酒后出现言语不清、肢体异常，最终被诊断为急性脑卒中。对三高人群，饮酒和重口饭局不是普通放松。</p>
+          <div class="news-actions">
+            <button type="button" id="newsAction">今晚不喝酒 +20</button>
+            <button type="button" id="newsRefresh">换一条</button>
+          </div>
+        </article>
+      </section>
+
+      <section class="section">
+        <div class="section-title">
+          <h2>30 天高危热力图</h2>
+          <span>越深越危险</span>
+        </div>
+        <div class="heatmap" aria-label="高危行为热力图">
+          <div>晚睡</div>
+          <div class="cells"><i></i><i class="hot"></i><i></i><i class="warm"></i><i class="hot"></i><i></i><i class="warm"></i></div>
+          <div>饮酒</div>
+          <div class="cells"><i></i><i class="hot"></i><i></i><i></i><i class="warm"></i><i></i><i></i></div>
+          <div>宵夜</div>
+          <div class="cells"><i class="warm"></i><i></i><i></i><i class="hot"></i><i></i><i></i><i class="warm"></i></div>
+        </div>
+      </section>
+      </div>
+    </main>
+
+    <div class="drawer-backdrop" id="drawerBackdrop"></div>
+    <aside class="history-drawer" id="historyDrawer" aria-label="历史记录">
+      <div class="drawer-header">
+        <div>
+          <p>历史记录</p>
+          <h2>最近守住</h2>
+        </div>
+        <button type="button" id="historyClose" aria-label="关闭历史记录">×</button>
+      </div>
+      <div class="history-summary">
+        <div>
+          <strong id="historyPoints">65</strong>
+          <span>本周守住值</span>
+        </div>
+        <div>
+          <strong>3</strong>
+          <span>高风险时刻</span>
+        </div>
+      </div>
+      <div class="history-list" id="historyList">
+        <article>
+          <time>等待记录</time>
+          <strong>还没有完整记录</strong>
+          <p>完成今日记录后，这里会按天保存所有选择项。</p>
+        </article>
+      </div>
+      <div class="drawer-footer">
+        <button type="button" id="clearHistory">清除历史记录</button>
+      </div>
+    </aside>
+
+    <nav class="bottom-nav" aria-label="底部导航">
+      <button type="button" class="active" data-target="todayPage">今日</button>
+      <button type="button" data-target="recordPage">记录</button>
+      <button type="button" data-target="guardPage">守护</button>
+    </nav>
+
+    <div class="toast" id="toast" role="status"></div>
+    <script src="./app.js"></script>
+  </body>
+</html>
